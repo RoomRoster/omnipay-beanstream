@@ -26,6 +26,20 @@ class UpdateProfileCardRequestTest extends TestCase
         $this->assertSame('9ba60541d32648B1A3581670123dF2Ef', $response->getCustomerCode());
     }
 
+    public function testSendError()
+    {
+        $this->request->setProfileId('9ba60541d32648B1A3581670123dF2Ef');
+        $this->request->setCardId('1');
+        $card = $this->getValidCard();
+        $this->assertSame($this->request, $this->request->setCard($card));
+        $this->setMockHttpResponse('UpdateProfileCardFailure.txt');
+        $response = $this->request->send();
+        $this->assertFalse($response->isSuccessful());
+        $this->assertSame(19, $response->getCode());
+        $this->assertSame(3, $response->getCategory());
+        $this->assertSame('Customer information failed data validation', $response->getMessage());
+    }
+
     public function testEndpoint()
     {
         $this->assertSame($this->request, $this->request->setProfileId('1'));
