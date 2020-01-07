@@ -23,6 +23,10 @@ class CreateProfileCardRequest extends AbstractProfileRequest
             );
         }
 
+        if ($this->getToken()) {
+            $data['token'] = $this->getToken();
+        }
+
         return $data;
     }
 
