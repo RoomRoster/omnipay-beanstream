@@ -49,6 +49,12 @@ class UpdateProfileCardRequestTest extends TestCase
         $this->assertSame('https://www.beanstream.com/api/v1/profiles/' . $this->request->getProfileId() . '/cards/' . $this->request->getCardId(), $this->request->getEndpoint());
     }
 
+    public function testComment()
+    {
+        $this->assertSame($this->request, $this->request->setComment('test'));
+        $this->assertSame('test', $this->request->getComment());
+    }
+
     public function testCard()
     {
         $this->request->setProfileId('8F10Ab54FC434b71972cF2E442c0fb4f');
