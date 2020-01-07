@@ -9,7 +9,9 @@ class CreateProfileCardRequest extends AbstractProfileRequest
 
     public function getData()
     {
-        $data = array();
+        $data = array(
+            'comment' => $this->getComment()
+        );
 
         if ($this->getCard()) {
             $this->getCard()->validate();
