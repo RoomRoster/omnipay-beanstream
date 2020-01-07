@@ -13,7 +13,7 @@ class CreateProfileCardRequest extends AbstractProfileRequest
         $this->getCard()->validate();
 
         if ($this->getCard()) {
-            $data = array(
+            $data['card'] = array(
                 'number' => $this->getCard()->getNumber(),
                 'name' => $this->getCard()->getName(),
                 'expiry_month' => $this->getCard()->getExpiryDate('m'),
