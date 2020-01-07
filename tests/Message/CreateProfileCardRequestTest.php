@@ -50,11 +50,11 @@ class CreateProfileCardRequestTest extends TestCase
         $card = $this->getValidCard();
         $this->assertSame($this->request, $this->request->setCard($card));
         $data = $this->request->getData();
-        $this->assertSame($card['number'], $data['number']);
-        $this->assertSame($card['cvv'], $data['cvd']);
-        $this->assertSame(sprintf("%02d", $card['expiryMonth']), $data['expiry_month']);
-        $this->assertSame(substr($card['expiryYear'], -2), $data['expiry_year']);
-        $this->assertSame($card['firstName'] . ' ' . $card['lastName'], $data['name']);
+        $this->assertSame($card['number'], $data['card']['number']);
+        $this->assertSame($card['cvv'], $data['card']['cvd']);
+        $this->assertSame(sprintf("%02d", $card['expiryMonth']), $data['card']['expiry_month']);
+        $this->assertSame(substr($card['expiryYear'], -2), $data['card']['expiry_year']);
+        $this->assertSame($card['firstName'] . ' ' . $card['lastName'], $data['card']['name']);
     }
 
     public function testHttpMethod()
