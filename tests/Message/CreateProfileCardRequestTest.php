@@ -63,6 +63,19 @@ class CreateProfileCardRequestTest extends TestCase
         $this->assertSame($card['firstName'] . ' ' . $card['lastName'], $data['card']['name']);
     }
 
+    public function testToken()
+    {
+        $token = array(
+            'name' => 'token-test-name',
+            'code' => 'token-test-code'
+        );
+
+        $this->assertSame($this->request, $this->request->setToken($token));
+        $this->assertSame($token, $this->request->getToken());
+        $data = $this->request->getData();
+        $this->assertSame($token, $data['token']);
+    }
+
     public function testHttpMethod()
     {
         $this->assertSame('POST', $this->request->getHttpMethod());

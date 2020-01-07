@@ -69,6 +69,20 @@ class UpdateProfileCardRequestTest extends TestCase
         $this->assertSame($card['firstName'] . ' ' . $card['lastName'], $data['card']['name']);
     }
 
+    public function testToken()
+    {
+        $this->request->setProfileId('8F10Ab54FC434b71972cF2E442c0fb4f');
+        $this->request->setCardId('1');
+        $token = array(
+            'name' => 'token-test-name',
+            'code' => 'token-test-code'
+        );
+        $this->assertSame($this->request, $this->request->setToken($token));
+        $this->assertSame($token, $this->request->getToken());
+        $data = $this->request->getData();
+        $this->assertSame($token, $data['token']);
+    }
+
     public function testHttpMethod()
     {
         $this->assertSame('PUT', $this->request->getHttpMethod());
