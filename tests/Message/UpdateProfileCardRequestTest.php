@@ -12,6 +12,20 @@ class UpdateProfileCardRequestTest extends TestCase
         $this->request->initialize();
     }
 
+    public function testSendSuccess()
+    {
+        $this->request->setProfileId('9ba60541d32648B1A3581670123dF2Ef');
+        $this->request->setCardId('1');
+        $card = $this->getValidCard();
+        $this->assertSame($this->request, $this->request->setCard($card));
+        $this->setMockHttpResponse('UpdateProfileCardSuccess.txt');
+        $response = $this->request->send();
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame(1, $response->getCode());
+        $this->assertSame('Operation Successful', $response->getMessage());
+        $this->assertSame('9ba60541d32648B1A3581670123dF2Ef', $response->getCustomerCode());
+    }
+
     public function testEndpoint()
     {
         $this->assertSame($this->request, $this->request->setProfileId('1'));
